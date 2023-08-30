@@ -1,0 +1,4 @@
+syntax = "proto3";
+package mops;
+import "plumber/plumber.proto"
+option go_package = "github.com/tinkershack/muxfarm/mops";

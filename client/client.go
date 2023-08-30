@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"io"
 	"log"
 	"time"
 
@@ -21,24 +20,19 @@ func main() {
 	defer conn.Close()
 
 	client := pb.NewMopsClient(conn)
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 	defer cancel()
 	min := pb.NewMediaIn()
-	min.Add(pb.StorageType_STORAGE_S3, &pb.URI_S3Path{S3Path: "https://aomtest1.s3.ap-south-1.amazonaws.com/glocken.mov"})
-	stream, err := client.Mimo(ctx, min)
+	min.Add(pb.StorageType_STORAGE_S3,
+		&pb.URI_S3Path{
+			S3Path: "https://aomtest1.s3.ap-south-1.amazonaws.com/glocken.mov",
+		})
+	min.Cid = &pb.CallerID{Cid: "tc2"}
+	mid, err := client.Ingest(ctx, min)
 	if err != nil {
-		log.Fatalf("Fail client.Mimo : %v", err)
+		log.Fatalf("Fail client.Ingest : %v", err)
 	}
 
-	for {
-		out, err := stream.Recv()
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			log.Fatalf("Error stream.Recv: %v", err)
-		}
-		log.Printf("%+v", out)
-	}
+	log.Println("return client.Ingest: ", mid)
 
 }
