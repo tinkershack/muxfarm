@@ -27,7 +27,7 @@ func main() {
 		&pb.URI_S3Path{
 			S3Path: "https://aomtest1.s3.ap-south-1.amazonaws.com/glocken.mov",
 		})
-	min.Cid = &pb.CallerID{Cid: "tc2"}
+	min.Callerid = &pb.CallerID{Cid: "tc2"}
 	mid, err := client.Ingest(ctx, min)
 	if err != nil {
 		log.Fatalf("Fail client.Ingest : %v", err)

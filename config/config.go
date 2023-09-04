@@ -1,3 +1,6 @@
+// TODO:
+// validate config
+
 package config
 
 import (

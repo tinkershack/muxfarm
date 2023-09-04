@@ -4,13 +4,12 @@ import (
 	"context"
 	"log"
 
-	"github.com/google/uuid"
+	"github.com/tinkershack/muxfarm/fixtures"
 	"github.com/tinkershack/muxfarm/plumber"
 	"github.com/tinkershack/muxfarm/store"
-	"google.golang.org/protobuf/encoding/protojson"
 )
 
-// Implements mops service defined in Plumber proto
+// Implements mops service defined in Plumber
 type mops struct {
 	plumber.UnimplementedMopsServer
 	ds store.Document // Document Store
@@ -23,30 +22,34 @@ func Mops(db store.Document) *mops {
 	return m
 }
 
-type ingestDoc struct {
-	*plumber.MuxfarmID
-	*plumber.MediaIn
-}
+// TODO:
+// Validate fields before ingest
 
 func (m *mops) Ingest(ctx context.Context, min *plumber.MediaIn) (*plumber.MuxfarmID, error) {
-	mid := plumber.NewMuxfarmID(uuid.NewString())
-	doc := new(ingestDoc)
-	doc.MuxfarmID = mid
-	doc.MediaIn = min
-	pj := protojson.MarshalOptions{
-		EmitUnpopulated: true,
+	doc := new(fixtures.IngestDoc)
+	mid := new(plumber.MuxfarmID)
+	mid.ID()
+	doc.Muxfarmid = mid
+	doc.Mediain = min
+	doc.Status = plumber.NewStatus(plumber.State_STATE_UNSPECIFIED)
+	doc.Timestamp = doc.Status.GetUpdateTimestamp()
+
+	docb, err := store.ProtoBSON(doc)
+	if err != nil {
+		log.Printf("Fail: ProtoBSON: %s\n", err)
+		return nil, err
 	}
-	docj, err := pj.Marshal(doc)
 
 	docs := make([]interface{}, 1)
-	docs[0] = doc
-	log.Printf("%+v\n%+v", min, docs[0])
-	ret, err := m.ds.Insert(context.TODO(), "ingest", docs)
+	docs[0] = docb
+	log.Printf("\nproto: %+v\nbson: %+v\n", doc, docs[0])
+	insOp, _ := m.ds.Option("")
+	ret, err := m.ds.Insert(context.TODO(), fixtures.IngestCollection, docs, insOp)
 	if err != nil {
 		log.Printf("Fail: insert document: %s\n", err)
 		return nil, err
 	}
-	log.Printf("Ok: insert id: %+v", ret)
+	log.Printf("Ok: insert id: %+v\n", ret)
 
 	return mid, nil
 }

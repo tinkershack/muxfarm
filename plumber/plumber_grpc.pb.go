@@ -34,7 +34,7 @@ func NewMopsClient(cc grpc.ClientConnInterface) MopsClient {
 
 func (c *mopsClient) Ingest(ctx context.Context, in *MediaIn, opts ...grpc.CallOption) (*MuxfarmID, error) {
 	out := new(MuxfarmID)
-	err := c.cc.Invoke(ctx, "/plumber.Mops/Ingest", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/plumber.plumber.Mops/Ingest", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -42,7 +42,7 @@ func (c *mopsClient) Ingest(ctx context.Context, in *MediaIn, opts ...grpc.CallO
 }
 
 func (c *mopsClient) Pulse(ctx context.Context, in *MuxfarmID, opts ...grpc.CallOption) (Mops_PulseClient, error) {
-	stream, err := c.cc.NewStream(ctx, &Mops_ServiceDesc.Streams[0], "/plumber.Mops/Pulse", opts...)
+	stream, err := c.cc.NewStream(ctx, &Mops_ServiceDesc.Streams[0], "/plumber.plumber.Mops/Pulse", opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -117,7 +117,7 @@ func _Mops_Ingest_Handler(srv interface{}, ctx context.Context, dec func(interfa
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/plumber.Mops/Ingest",
+		FullMethod: "/plumber.plumber.Mops/Ingest",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MopsServer).Ingest(ctx, req.(*MediaIn))
@@ -150,7 +150,7 @@ func (x *mopsPulseServer) Send(m *MuxfarmObject) error {
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Mops_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "plumber.Mops",
+	ServiceName: "plumber.plumber.Mops",
 	HandlerType: (*MopsServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -165,5 +165,5 @@ var Mops_ServiceDesc = grpc.ServiceDesc{
 			ServerStreams: true,
 		},
 	},
-	Metadata: "plumber.proto",
+	Metadata: "plumber/plumber.proto",
 }

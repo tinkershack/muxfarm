@@ -1,5 +1,5 @@
 syntax = "proto3";
-package plumber;
+package plumber.plumber;
 option go_package = "github.com/tinkershack/muxfarm/plumber";
 
 // Muxfarm operations
@@ -12,9 +12,9 @@ service Mops {
 }
 
 message MediaIn {
-    repeated Media ins = 1;
+    repeated Media input = 1;
     Operation operation = 2;
-    CallerID cid = 3;
+    CallerID callerid = 3;
 }
 
 message CallerID {
@@ -22,8 +22,8 @@ message CallerID {
 }
 
 message Media {
-    StorageType type = 1;
-    URI path = 2;
+    StorageType storagetype = 1;
+    URI uri = 2;
 }
 
 message MuxfarmID {
@@ -31,7 +31,8 @@ message MuxfarmID {
 }
 
 message MuxfarmObject {
-    MuxfarmID mid = 1;
+    MuxfarmID muxfarmid = 1;
+    MediaIn mediain = 2;
 }
 
 enum StorageType {

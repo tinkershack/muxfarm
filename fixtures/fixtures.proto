@@ -1,0 +1,22 @@
+syntax = "proto3";
+package fixtures;
+option go_package = "github.com/tinkershack/muxfarm/fixtures";
+
+import "plumber/plumber.proto";
+import "plumber/state.proto";
+import "google/protobuf/timestamp.proto";
+
+message ingestDoc {
+    plumber.plumber.MuxfarmID muxfarmid = 1;
+    plumber.plumber.MediaIn mediain = 2;
+    plumber.state.Status status = 3;
+    google.protobuf.Timestamp timestamp = 4;
+}
+
+message ingestBatchDoc {
+    plumber.plumber.MuxfarmID muxfarmid = 1;
+    plumber.plumber.MuxfarmID ingestid = 2;
+    plumber.plumber.Media media = 3;
+    plumber.state.Status status = 4;
+    google.protobuf.Timestamp timestamp = 5;
+}
