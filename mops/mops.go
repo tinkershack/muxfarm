@@ -43,7 +43,7 @@ func (m *mops) Ingest(ctx context.Context, min *plumber.MediaIn) (*plumber.Muxfa
 	docs := make([]interface{}, 1)
 	docs[0] = docb
 	log.Printf("\nproto: %+v\nbson: %+v\n", doc, docs[0])
-	insOp, _ := m.ds.Option("")
+	insOp := m.ds.Option("")
 	ret, err := m.ds.Insert(context.TODO(), fixtures.IngestCollection, docs, insOp)
 	if err != nil {
 		log.Printf("Fail: insert document: %s\n", err)

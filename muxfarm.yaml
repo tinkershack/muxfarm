@@ -1,0 +1,14 @@
+Muxfarm:
+  MIMO:
+    HostName: "localhost"
+    Port: "50050"
+
+DocumentStore: "mongodb"
+MongoDB:
+  Name: "mongodb"
+  URI: "mongodb://localhost:27017"
+  DBName: "muxdb"
+DLMRedis:
+  Name: "redis"
+  URI: ""
+  DBName: "muxdlm"

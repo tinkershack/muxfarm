@@ -64,7 +64,9 @@ func IngestBatcher(ctx context.Context, args []string) {
 		}
 		log.Println("IgestDocument count:", len(docs))
 
-		_ = <-waiter
+		select {
+		case <-waiter:
 
+		}
 	}
 }

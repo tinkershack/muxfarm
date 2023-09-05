@@ -47,20 +47,19 @@ type InsertOption struct {
 
 // func (fo *insertOption) ApplyOption()
 
-func (mdb *mongoDB) Option(optionType string) (store.DocumentOption, error) {
+func (mdb *mongoDB) Option(optionType string) store.DocumentOption {
 	switch optionType {
 	case "find":
 		fo := new(FindOption)
 		fo.Option = mo.Find()
-		return fo, nil
+		return fo
 	case "insert":
 		io := new(InsertOption)
 		io.Option = mo.InsertMany()
-		return io, nil
-	case "":
-		return &EmptyOption{}, nil
+		return io
+	default:
+		return &EmptyOption{}
 	}
-	return nil, errors.New("fail: invalid options")
 }
 
 func MongoDB(uri, dbName string) (*mongoDB, error) {
@@ -84,16 +83,15 @@ func (m *mongoDB) connect(ctx context.Context) (*mongo.Client, error) {
 	opts := mo.Client().ApplyURI(uri).SetServerAPIOptions(serverAPI)
 	client, err := mongo.Connect(ctx, opts)
 	if err != nil {
-		log.Printf("Fail: connect MongoDB\n%s", err)
+		log.Printf("fail: connect MongoDB\n%s", err)
 		return client, err
 	}
 
 	var result bson.M
 	if err := client.Database(m.dbName).RunCommand(context.TODO(), bson.D{{"ping", 1}}).Decode(&result); err != nil {
-		log.Printf("Fail: connect MongoDB\n%s", err)
+		log.Printf("fail: connect MongoDB\n%s", err)
 		return nil, err
 	}
-	log.Printf("Out: Ping: %v", result)
 
 	return client, err
 }
@@ -103,7 +101,7 @@ func (m *mongoDB) Insert(ctx context.Context, collection string, docs []interfac
 	opts := mo.InsertMany().SetOrdered(false)
 	ret, err := col.InsertMany(ctx, docs, opts)
 	if err != nil {
-		log.Printf("Fail: insert document\n%s", err)
+		log.Printf("fail: insert document\n%s", err)
 		return ret, err
 	}
 

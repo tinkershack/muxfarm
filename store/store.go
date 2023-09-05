@@ -14,7 +14,7 @@ import (
 // Fix DocumentOption interface methods
 
 type Document interface {
-	Option(optionType string) (DocumentOption, error)
+	Option(optionType string) DocumentOption
 	Insert(ctx context.Context, collection string, docs []interface{}, option DocumentOption) (interface{}, error)
 	Find(ctx context.Context, collection string, filter interface{}, option DocumentOption) (interface{}, error)
 }
