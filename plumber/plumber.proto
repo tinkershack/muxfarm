@@ -37,7 +37,7 @@ message MuxfarmObject {
 
 enum StorageType {
     STORAGE_UNSPECIFIED = 0;
-    STORAGE_FS = 1;
+    STORAGE_LFS = 1;
     STORAGE_HTTP = 2;
     STORAGE_S3 = 3;
     STORAGE_GCS = 4;
@@ -46,7 +46,7 @@ enum StorageType {
 
 message URI {
     oneof uri {
-        string fs_path = 1;     // Filesystem URI
+        string lfs_path = 1;     // Local Filesystem URI
         string http_path = 2;   // HTTP URL
         string s3_path = 3;     // S3 URI, S3 HTTP object URL
         string gcs_path = 4;    // GCS URL

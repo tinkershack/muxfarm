@@ -26,9 +26,10 @@ type muxfarmServer struct {
 }
 
 type dataStore struct {
-	Name   string
-	URI    string
-	DBName string
+	Name     string
+	URI      string
+	DBName   string
+	DBNumber int
 }
 
 var legal = &struct {

@@ -7,13 +7,16 @@ import "google/protobuf/timestamp.proto";
 enum State {
     STATE_UNSPECIFIED = 0;
     INGEST_OK = 1;
-    INGEST_BATCH_OK = 2;
-    BATCH_PULL_OK = 3;
-    BATCH_CRUSH_OK = 4;
-    MEDIA_PROBE_OK = 5;
-    MEDIA_ACID_OK = 6;
-    MEDIA_DOOBIE_OK = 7;
-    DOOBIE_SHELF_OK = 8;
+    PULL_OK = 2;
+    PULL_FAIL = 3;
+    PROBE_OK = 4;
+    PROBE_FAIL = 5;
+    ACID_OK = 6;
+    ACID_FAIL = 7;
+    DOOBIE_OK = 8;
+    DOOBIE_FAIL = 9;
+    SHELF_OK = 10;
+    SHELF_FAIL = 11;
 }
 
 message Status {

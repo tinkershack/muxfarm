@@ -122,3 +122,23 @@ func (m *mongoDB) Find(ctx context.Context, collection string, filter interface{
 
 	return cursor, nil
 }
+
+func (m *mongoDB) FindOneAndUpdate(ctx context.Context, collection string, filter interface{}, update interface{}) error {
+	col := m.Client.Database(m.dbName).Collection(collection)
+	err := col.FindOneAndUpdate(
+		context.TODO(),
+		filter,
+		update,
+		nil,
+	).Err()
+	if err != nil {
+		// ErrNoDocuments means that the filter did not match any documents in
+		// the collection.
+		if err == mongo.ErrNoDocuments {
+			return errors.New("no document found")
+		}
+		return err
+	}
+
+	return nil
+}

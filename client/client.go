@@ -27,6 +27,10 @@ func main() {
 		&pb.URI_S3Path{
 			S3Path: "https://aomtest1.s3.ap-south-1.amazonaws.com/glocken.mov",
 		})
+	min.Add(pb.StorageType_STORAGE_S3,
+		&pb.URI_S3Path{
+			S3Path: "https://aomscrap.s3.ap-south-1.amazonaws.com/test-media/fglock.mp4",
+		})
 	min.Callerid = &pb.CallerID{Cid: "tc2"}
 	mid, err := client.Ingest(ctx, min)
 	if err != nil {

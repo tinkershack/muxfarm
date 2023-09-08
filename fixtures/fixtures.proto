@@ -13,10 +13,12 @@ message ingestDoc {
     google.protobuf.Timestamp timestamp = 4;
 }
 
-message ingestBatchDoc {
-    plumber.plumber.MuxfarmID muxfarmid = 1;
+message atomDoc {
+    plumber.plumber.MuxfarmID atomid = 1;
     plumber.plumber.MuxfarmID ingestid = 2;
     plumber.plumber.Media media = 3;
-    plumber.state.Status status = 4;
-    google.protobuf.Timestamp timestamp = 5;
+    plumber.plumber.Operation operation = 4;
+    plumber.plumber.CallerID callerid = 5;
+    plumber.state.Status status = 6;
+    google.protobuf.Timestamp timestamp = 7;
 }

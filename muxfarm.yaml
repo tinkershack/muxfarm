@@ -10,5 +10,5 @@ MongoDB:
   DBName: "muxdb"
 DLMRedis:
   Name: "redis"
-  URI: ""
-  DBName: "muxdlm"
+  URI: "localhost:6379"
+  DBNumber: 11

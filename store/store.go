@@ -17,6 +17,7 @@ type Document interface {
 	Option(optionType string) DocumentOption
 	Insert(ctx context.Context, collection string, docs []interface{}, option DocumentOption) (interface{}, error)
 	Find(ctx context.Context, collection string, filter interface{}, option DocumentOption) (interface{}, error)
+	FindOneAndUpdate(ctx context.Context, collection string, filter interface{}, update interface{}) error
 }
 
 type DocumentOption interface {
