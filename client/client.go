@@ -24,13 +24,11 @@ func main() {
 	defer cancel()
 	min := pb.NewMediaIn()
 	min.Add(pb.StorageType_STORAGE_S3,
-		&pb.URI_S3Path{
-			S3Path: "https://aomtest1.s3.ap-south-1.amazonaws.com/glocken.mov",
-		})
+		"https://aomscrap.s3.ap-south-1.amazonaws.com/test-media/fglock.mp4",
+	)
 	min.Add(pb.StorageType_STORAGE_S3,
-		&pb.URI_S3Path{
-			S3Path: "https://aomscrap.s3.ap-south-1.amazonaws.com/test-media/fglock.mp4",
-		})
+		"https://aomscrap.s3.ap-south-1.amazonaws.com/test-media/glocken.mov",
+	)
 	min.Callerid = &pb.CallerID{Cid: "tc2"}
 	mid, err := client.Ingest(ctx, min)
 	if err != nil {

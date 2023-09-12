@@ -21,11 +21,6 @@ message CallerID {
     string cid = 1;
 }
 
-message Media {
-    StorageType storagetype = 1;
-    URI uri = 2;
-}
-
 message MuxfarmID {
     string mid = 1;
 }
@@ -33,6 +28,11 @@ message MuxfarmID {
 message MuxfarmObject {
     MuxfarmID muxfarmid = 1;
     MediaIn mediain = 2;
+}
+
+message Media {
+    StorageType storagetype = 1;
+    string uri = 2;
 }
 
 enum StorageType {
@@ -44,15 +44,15 @@ enum StorageType {
     STORAGE_GIT = 5;
 }
 
-message URI {
-    oneof uri {
-        string lfs_path = 1;     // Local Filesystem URI
-        string http_path = 2;   // HTTP URL
-        string s3_path = 3;     // S3 URI, S3 HTTP object URL
-        string gcs_path = 4;    // GCS URL
-        string git_path = 5;    // git URL
-    }
-}
+// message URI {
+//     oneof uri {
+//         string lfs_path = 1;     // Local Filesystem URI
+//         string http_path = 2;   // HTTP URL
+//         string s3_path = 3;     // S3 URI, S3 HTTP object URL
+//         string gcs_path = 4;    // GCS URL
+//         string git_path = 5;    // git URL
+//     }
+// }
 
 message Operation {
     Acid acid = 1;
