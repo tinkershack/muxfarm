@@ -188,6 +188,61 @@ func (x *AtomDoc) GetTimestamp() *timestamppb.Timestamp {
 	return nil
 }
 
+type Atom struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Atomid *plumber.MuxfarmID `protobuf:"bytes,1,opt,name=atomid,proto3" json:"atomid,omitempty"`
+	Media  *plumber.Media     `protobuf:"bytes,2,opt,name=media,proto3" json:"media,omitempty"`
+}
+
+func (x *Atom) Reset() {
+	*x = Atom{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_fixtures_fixtures_proto_msgTypes[2]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Atom) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Atom) ProtoMessage() {}
+
+func (x *Atom) ProtoReflect() protoreflect.Message {
+	mi := &file_fixtures_fixtures_proto_msgTypes[2]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Atom.ProtoReflect.Descriptor instead.
+func (*Atom) Descriptor() ([]byte, []int) {
+	return file_fixtures_fixtures_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *Atom) GetAtomid() *plumber.MuxfarmID {
+	if x != nil {
+		return x.Atomid
+	}
+	return nil
+}
+
+func (x *Atom) GetMedia() *plumber.Media {
+	if x != nil {
+		return x.Media
+	}
+	return nil
+}
+
 var File_fixtures_fixtures_proto protoreflect.FileDescriptor
 
 var file_fixtures_fixtures_proto_rawDesc = []byte{
@@ -236,10 +291,17 @@ var file_fixtures_fixtures_proto_rawDesc = []byte{
 	0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x18, 0x07, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a,
 	0x2e, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
 	0x2e, 0x54, 0x69, 0x6d, 0x65, 0x73, 0x74, 0x61, 0x6d, 0x70, 0x52, 0x09, 0x74, 0x69, 0x6d, 0x65,
-	0x73, 0x74, 0x61, 0x6d, 0x70, 0x42, 0x29, 0x5a, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x74, 0x69, 0x6e, 0x6b, 0x65, 0x72, 0x73, 0x68, 0x61, 0x63, 0x6b, 0x2f,
-	0x6d, 0x75, 0x78, 0x66, 0x61, 0x72, 0x6d, 0x2f, 0x66, 0x69, 0x78, 0x74, 0x75, 0x72, 0x65, 0x73,
-	0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x73, 0x74, 0x61, 0x6d, 0x70, 0x22, 0x68, 0x0a, 0x04, 0x61, 0x74, 0x6f, 0x6d, 0x12, 0x32, 0x0a,
+	0x06, 0x61, 0x74, 0x6f, 0x6d, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e,
+	0x70, 0x6c, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x2e, 0x70, 0x6c, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x2e,
+	0x4d, 0x75, 0x78, 0x66, 0x61, 0x72, 0x6d, 0x49, 0x44, 0x52, 0x06, 0x61, 0x74, 0x6f, 0x6d, 0x69,
+	0x64, 0x12, 0x2c, 0x0a, 0x05, 0x6d, 0x65, 0x64, 0x69, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x16, 0x2e, 0x70, 0x6c, 0x75, 0x6d, 0x62, 0x65, 0x72, 0x2e, 0x70, 0x6c, 0x75, 0x6d, 0x62,
+	0x65, 0x72, 0x2e, 0x4d, 0x65, 0x64, 0x69, 0x61, 0x52, 0x05, 0x6d, 0x65, 0x64, 0x69, 0x61, 0x42,
+	0x29, 0x5a, 0x27, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x74, 0x69,
+	0x6e, 0x6b, 0x65, 0x72, 0x73, 0x68, 0x61, 0x63, 0x6b, 0x2f, 0x6d, 0x75, 0x78, 0x66, 0x61, 0x72,
+	0x6d, 0x2f, 0x66, 0x69, 0x78, 0x74, 0x75, 0x72, 0x65, 0x73, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x33,
 }
 
 var (
@@ -254,35 +316,38 @@ func file_fixtures_fixtures_proto_rawDescGZIP() []byte {
 	return file_fixtures_fixtures_proto_rawDescData
 }
 
-var file_fixtures_fixtures_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_fixtures_fixtures_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_fixtures_fixtures_proto_goTypes = []interface{}{
 	(*IngestDoc)(nil),             // 0: fixtures.ingestDoc
 	(*AtomDoc)(nil),               // 1: fixtures.atomDoc
-	(*plumber.MuxfarmID)(nil),     // 2: plumber.plumber.MuxfarmID
-	(*plumber.MediaIn)(nil),       // 3: plumber.plumber.MediaIn
-	(*plumber.Status)(nil),        // 4: plumber.state.Status
-	(*timestamppb.Timestamp)(nil), // 5: google.protobuf.Timestamp
-	(*plumber.Media)(nil),         // 6: plumber.plumber.Media
-	(*plumber.Operation)(nil),     // 7: plumber.plumber.Operation
-	(*plumber.CallerID)(nil),      // 8: plumber.plumber.CallerID
+	(*Atom)(nil),                  // 2: fixtures.atom
+	(*plumber.MuxfarmID)(nil),     // 3: plumber.plumber.MuxfarmID
+	(*plumber.MediaIn)(nil),       // 4: plumber.plumber.MediaIn
+	(*plumber.Status)(nil),        // 5: plumber.state.Status
+	(*timestamppb.Timestamp)(nil), // 6: google.protobuf.Timestamp
+	(*plumber.Media)(nil),         // 7: plumber.plumber.Media
+	(*plumber.Operation)(nil),     // 8: plumber.plumber.Operation
+	(*plumber.CallerID)(nil),      // 9: plumber.plumber.CallerID
 }
 var file_fixtures_fixtures_proto_depIdxs = []int32{
-	2,  // 0: fixtures.ingestDoc.muxfarmid:type_name -> plumber.plumber.MuxfarmID
-	3,  // 1: fixtures.ingestDoc.mediain:type_name -> plumber.plumber.MediaIn
-	4,  // 2: fixtures.ingestDoc.status:type_name -> plumber.state.Status
-	5,  // 3: fixtures.ingestDoc.timestamp:type_name -> google.protobuf.Timestamp
-	2,  // 4: fixtures.atomDoc.atomid:type_name -> plumber.plumber.MuxfarmID
-	2,  // 5: fixtures.atomDoc.ingestid:type_name -> plumber.plumber.MuxfarmID
-	6,  // 6: fixtures.atomDoc.media:type_name -> plumber.plumber.Media
-	7,  // 7: fixtures.atomDoc.operation:type_name -> plumber.plumber.Operation
-	8,  // 8: fixtures.atomDoc.callerid:type_name -> plumber.plumber.CallerID
-	4,  // 9: fixtures.atomDoc.status:type_name -> plumber.state.Status
-	5,  // 10: fixtures.atomDoc.timestamp:type_name -> google.protobuf.Timestamp
-	11, // [11:11] is the sub-list for method output_type
-	11, // [11:11] is the sub-list for method input_type
-	11, // [11:11] is the sub-list for extension type_name
-	11, // [11:11] is the sub-list for extension extendee
-	0,  // [0:11] is the sub-list for field type_name
+	3,  // 0: fixtures.ingestDoc.muxfarmid:type_name -> plumber.plumber.MuxfarmID
+	4,  // 1: fixtures.ingestDoc.mediain:type_name -> plumber.plumber.MediaIn
+	5,  // 2: fixtures.ingestDoc.status:type_name -> plumber.state.Status
+	6,  // 3: fixtures.ingestDoc.timestamp:type_name -> google.protobuf.Timestamp
+	3,  // 4: fixtures.atomDoc.atomid:type_name -> plumber.plumber.MuxfarmID
+	3,  // 5: fixtures.atomDoc.ingestid:type_name -> plumber.plumber.MuxfarmID
+	7,  // 6: fixtures.atomDoc.media:type_name -> plumber.plumber.Media
+	8,  // 7: fixtures.atomDoc.operation:type_name -> plumber.plumber.Operation
+	9,  // 8: fixtures.atomDoc.callerid:type_name -> plumber.plumber.CallerID
+	5,  // 9: fixtures.atomDoc.status:type_name -> plumber.state.Status
+	6,  // 10: fixtures.atomDoc.timestamp:type_name -> google.protobuf.Timestamp
+	3,  // 11: fixtures.atom.atomid:type_name -> plumber.plumber.MuxfarmID
+	7,  // 12: fixtures.atom.media:type_name -> plumber.plumber.Media
+	13, // [13:13] is the sub-list for method output_type
+	13, // [13:13] is the sub-list for method input_type
+	13, // [13:13] is the sub-list for extension type_name
+	13, // [13:13] is the sub-list for extension extendee
+	0,  // [0:13] is the sub-list for field type_name
 }
 
 func init() { file_fixtures_fixtures_proto_init() }
@@ -315,6 +380,18 @@ func file_fixtures_fixtures_proto_init() {
 				return nil
 			}
 		}
+		file_fixtures_fixtures_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Atom); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -322,7 +399,7 @@ func file_fixtures_fixtures_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_fixtures_fixtures_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

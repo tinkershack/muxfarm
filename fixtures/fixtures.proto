@@ -22,3 +22,9 @@ message atomDoc {
     plumber.state.Status status = 6;
     google.protobuf.Timestamp timestamp = 7;
 }
+
+message atom {
+    plumber.plumber.MuxfarmID atomid = 1;
+    // media.uri should be relative path component to be joined with fixtures.AtomDirPath
+    plumber.plumber.Media media = 2; 
+}

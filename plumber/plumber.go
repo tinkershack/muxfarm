@@ -19,7 +19,7 @@ func (mid *MuxfarmID) ID() {
 	mid.Mid = uuid.NewString()
 }
 
-func (m *Media) FormURI() string {
+func (m *Media) FormGetterURI() string {
 	sourceURI := m.GetUri()
 	switch st := m.GetStoragetype(); st {
 	case StorageType_STORAGE_UNSPECIFIED:

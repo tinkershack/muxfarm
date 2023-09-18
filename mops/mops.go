@@ -13,7 +13,6 @@ import (
 type mops struct {
 	plumber.UnimplementedMopsServer
 	ds store.Document // Document Store
-	// mu sync.Mutex
 }
 
 func Mops(db store.Document) *mops {

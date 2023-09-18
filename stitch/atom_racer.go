@@ -13,6 +13,11 @@ import (
 // TODO:
 // stack cleanup functions before return
 
+type pullResult struct {
+	*fixtures.Atom
+	err error
+}
+
 func AtomRacer(ctx context.Context, args []string) {
 	config, err := config.New()
 	if err != nil {
@@ -29,14 +34,20 @@ func AtomRacer(ctx context.Context, args []string) {
 	dlmc, redisc := dlm.New(config.DLMRedis.URI, config.DLMRedis.DBNumber)
 	defer redisc.Close()
 
-	pullErrChan := make(chan error, fixtures.LimitResultAtomRacer)
+	// pull result chan
+	prCh := make(chan pullResult, fixtures.LimitResultAtomRacer)
 
-	go atomPull(ctx, ds, dlmc, pullErrChan)
+	go atomPull(ctx, ds, dlmc, prCh)
 
 	for {
 		select {
-		case err := <-pullErrChan:
-			log.Println(err)
+		// Check for result from atomPull
+		case res := <-prCh:
+			if res.err != nil {
+				log.Println(err)
+			} else {
+				log.Println("ok AtomPullResult:", res.Atom.Atomid.GetMid(), res.Atom.Media.GetUri())
+			}
 		}
 	}
 
