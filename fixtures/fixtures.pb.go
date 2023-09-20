@@ -194,7 +194,8 @@ type Atom struct {
 	unknownFields protoimpl.UnknownFields
 
 	Atomid *plumber.MuxfarmID `protobuf:"bytes,1,opt,name=atomid,proto3" json:"atomid,omitempty"`
-	Media  *plumber.Media     `protobuf:"bytes,2,opt,name=media,proto3" json:"media,omitempty"`
+	// media.uri should be relative path component to be joined with fixtures.AtomDirPath
+	Media *plumber.Media `protobuf:"bytes,2,opt,name=media,proto3" json:"media,omitempty"`
 }
 
 func (x *Atom) Reset() {

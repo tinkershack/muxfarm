@@ -22,7 +22,7 @@ func Mops(db store.Document) *mops {
 }
 
 // TODO:
-// Validate fields before ingest
+// - Validate fields before ingest
 
 func (m *mops) Ingest(ctx context.Context, min *plumber.MediaIn) (*plumber.MuxfarmID, error) {
 	doc := new(fixtures.IngestDoc)

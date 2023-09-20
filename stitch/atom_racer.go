@@ -11,7 +11,7 @@ import (
 )
 
 // TODO:
-// stack cleanup functions before return
+// - stack cleanup functions before return
 
 type pullResult struct {
 	*fixtures.Atom

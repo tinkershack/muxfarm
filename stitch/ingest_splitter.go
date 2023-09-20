@@ -17,8 +17,8 @@ import (
 )
 
 // TODO:
-// Prevent dangling db entries by cleaning up
-// stack cleanup functions before return
+// - Prevent dangling db entries by cleaning up
+// - stack cleanup functions before return
 
 func IngestSplitter(ctx context.Context, args []string) {
 	config, err := config.New()

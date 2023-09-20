@@ -20,8 +20,7 @@ import (
 )
 
 // TODO:
-// stack errors
-// call fail cleanup function before return
+// - stack errors
 
 func stateAtom(ctx context.Context, atomid string, fromState string, toState string, ds store.Document) error {
 
