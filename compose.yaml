@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Distributed Lock Manager for Muxfarm
+  dlm-redis:
+    image: "redis:7.2"
+    restart: always
+    volumes:
+      - dlm-redis-data:/data
+    ports:
+      - "6379:6379"
+      # RedisInsight
+      # - "8001:8001"
+    # Document store for Muxfarm
+  mongo:
+    # Default config of mongodb/community-server needs changes to connect from outside docker
+    # image: "mongodb/mongodb-community-server:7.0-ubi8"
+    #
+    # Official Docker mongo image works well out-of-the-box
+    image: "mongo:7.0"
+    restart: always
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+
+volumes:
+  dlm-redis-data:
+  mongo-data:
+  

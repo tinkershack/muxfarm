@@ -1,0 +1,30 @@
+syntax = "proto3";
+package fixtures;
+option go_package = "github.com/tinkershack/muxfarm/fixtures";
+
+import "plumber/plumber.proto";
+import "plumber/state.proto";
+import "google/protobuf/timestamp.proto";
+
+message ingestDoc {
+    plumber.plumber.MuxfarmID muxfarmid = 1;
+    plumber.plumber.MediaIn mediain = 2;
+    plumber.state.Status status = 3;
+    google.protobuf.Timestamp timestamp = 4;
+}
+
+message atomDoc {
+    plumber.plumber.MuxfarmID atomid = 1;
+    plumber.plumber.MuxfarmID ingestid = 2;
+    plumber.plumber.Media media = 3;
+    plumber.plumber.Operation operation = 4;
+    plumber.plumber.CallerID callerid = 5;
+    plumber.state.Status status = 6;
+    google.protobuf.Timestamp timestamp = 7;
+}
+
+message atom {
+    plumber.plumber.MuxfarmID atomid = 1;
+    // media.uri should be relative path component to be joined with fixtures.AtomDirPath
+    plumber.plumber.Media media = 2; 
+}

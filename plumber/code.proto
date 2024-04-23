@@ -1,0 +1,3 @@
+syntax = "proto3";
+package plumber;
+option go_package = "github.com/tinkershack/muxfarm/plumber";

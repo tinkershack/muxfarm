@@ -1,0 +1,68 @@
+syntax = "proto3";
+package plumber.plumber;
+option go_package = "github.com/tinkershack/muxfarm/plumber";
+
+// Muxfarm operations
+service Mops {
+    // Ingest media for processing
+    rpc Ingest(MediaIn) returns (MuxfarmID) {}
+
+    // Status of media associated with MID
+    rpc Pulse(MuxfarmID) returns (stream MuxfarmObject) {}
+}
+
+message MediaIn {
+    repeated Media input = 1;
+    Operation operation = 2;
+    CallerID callerid = 3;
+}
+
+message CallerID {
+    string cid = 1;
+}
+
+message MuxfarmID {
+    string mid = 1;
+}
+
+message MuxfarmObject {
+    MuxfarmID muxfarmid = 1;
+    MediaIn mediain = 2;
+}
+
+message Media {
+    StorageType storagetype = 1;
+    string uri = 2;
+}
+
+enum StorageType {
+    STORAGE_UNSPECIFIED = 0;
+    STORAGE_LFS = 1;
+    STORAGE_HTTP = 2;
+    STORAGE_S3 = 3;
+    STORAGE_GCS = 4;
+    STORAGE_GIT = 5;
+}
+
+message Operation {
+    Acid acid = 1;
+    Doobie doobie = 2;
+}
+
+enum OperationType {
+    OPERATION_UNSPECIFIED = 0;
+    OPERATION_ACID = 1;
+    OPERATION_DOOBIE = 2;
+}
+
+message Revelio {
+    Media media = 1;
+}
+
+message Acid {
+    Media media = 1;
+}
+
+message Doobie {
+    Media media = 1;
+}

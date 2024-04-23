@@ -1,0 +1,25 @@
+syntax = "proto3";
+package plumber.state;
+option go_package = "github.com/tinkershack/muxfarm/plumber";
+
+import "google/protobuf/timestamp.proto";
+
+enum State {
+    STATE_UNSPECIFIED = 0;
+    INGEST_OK = 1;
+    PULL_OK = 2;
+    PULL_FAIL = 3;
+    PROBE_OK = 4;
+    PROBE_FAIL = 5;
+    ACID_OK = 6;
+    ACID_FAIL = 7;
+    DOOBIE_OK = 8;
+    DOOBIE_FAIL = 9;
+    SHELF_OK = 10;
+    SHELF_FAIL = 11;
+}
+
+message Status {
+    State state = 1;
+    google.protobuf.Timestamp update_timestamp = 2;
+}
